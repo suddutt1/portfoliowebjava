@@ -49,8 +49,8 @@
 	<div><br/></div>
 	<div>
 	<span style="display:inline-block;width:40%"> 
-		<label style="display:inline-block;width:30%;" for="dpe">DPE</label> 
-		<pfd:mgrrefdata name="dpe" mgrtype="dpe" datalist="${mgrList}" id="dpe" defopt="true"></pfd:mgrrefdata>
+		<label style="display:inline-block;width:30%;" for="slm">Second Line Manager</label> 
+		<pfd:mgrrefdata name="slm" mgrtype="slm" datalist="${mgrList}" id="slm" selected="${projDetails.slm}"></pfd:mgrrefdata>
  	 </span> 
 	<span style="display:inline-block;width:40%"> 
 		<label style="display:inline-block;width:30%;" for="blueCommunity">Blue Community</label> 
@@ -60,13 +60,20 @@
 	<div><br/></div>
 	<div>
 	<span style="display:inline-block;width:40%"> 
-		<label style="display:inline-block;width:30%;" for="bam">BAM</label> 
-		<pfd:mgrrefdata name="bam" mgrtype="bam" datalist="${mgrList}" id="bam" defopt="true"></pfd:mgrrefdata>
+		<label style="display:inline-block;width:30%;" for="flm">First Line Manager</label> 
+		<pfd:mgrrefdata name="flm" mgrtype="flm" datalist="${mgrList}" id="flm" selected="${projDetails.flm}"></pfd:mgrrefdata>
 	 </span> 
 	<span style="display:inline-block;width:40%"> 
-		<label style="display:inline-block;width:30%;" for="director">Director</label> 
-		<pfd:mgrrefdata name="director" mgrtype="dir" datalist="${mgrList}" id="director" defopt="true"></pfd:mgrrefdata>
+		<label style="display:inline-block;width:30%;" for="l2ex">L2 Executive</label> 
+		<pfd:mgrrefdata name="l2ex" mgrtype="l2" datalist="${mgrList}" id="l2ex" selected="${projDetails.l2ex}"></pfd:mgrrefdata>
 	</span> 
+	</div>
+	<div><br/></div>
+		<div>
+		<span style="display:inline-block;width:40%"> 
+		<label style="display:inline-block;width:30%;" for="l2ex">L1 Executive</label> 
+			<pfd:mgrrefdata name="l1ex" mgrtype="l1" datalist="${mgrList}" id="l1ex" selected="${projDetails.l1ex}"></pfd:mgrrefdata>
+		</span> 
 	</div>
 	<div><br/></div>
 	<div>
@@ -112,9 +119,10 @@ $(document).ready(function(){
 			}
 		});
 	$("#projMgr").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");
-	$("#bam").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");
-	$("#dpe").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");
-	$("#director").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");	
+	$("#l1ex").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");
+	$("#l2ex").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");
+	$("#flm").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");	
+	$("#slm").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");
 	$("#projType").selectmenu({width: 300});
 	$("#projPrimTech").selectmenu({width: 300});
 	$("#domain").selectmenu({width: 300}).selectmenu( "menuWidget" ).css("height","200px");	

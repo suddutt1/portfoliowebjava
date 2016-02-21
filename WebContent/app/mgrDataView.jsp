@@ -35,6 +35,10 @@
 		<option value="pm">Sub Project Manager</option>
 		<option value="dpe">Delivery Project Executive(DPE)</option>
 		<option value="dir">Director</option>
+		<option value="l1">L1 Executive</option>
+		<option value="l2">L2 Executive</option>
+		<option value="flm">First Line Managers</option>
+		<option value="slm">Second Line Managers</option>
 	</select>
 	<div>
 	<input type="button" id="viewBtn" value="View"/>

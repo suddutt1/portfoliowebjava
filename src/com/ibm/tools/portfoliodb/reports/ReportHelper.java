@@ -1,5 +1,6 @@
 package com.ibm.tools.portfoliodb.reports;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +38,7 @@ public class ReportHelper implements ReportOptions{
 		}
 		if(baseList!=null && baseList.size()>0)
 		{
+			List<ProjAssignmentDetails> outputList = new ArrayList<>(baseList.size());
 			//Process the entries 
 			Map<String, EmployeeDetails> empMap  = getEmployeeDetails();
 			Map<Long, ProjectDetails> projMap = getProjectDetails();
@@ -46,18 +48,20 @@ public class ReportHelper implements ReportOptions{
 				//Need to fillup the project and employee data
 				rptData.setEmpDetails(empMap.get(rptData.getEmpid()));
 				ProjectDetails projDetails =projMap.get(rptData.getProjectId()); 
-				rptData.setProjDetails(projDetails);
+				
 				if(projDetails!=null)
 				{
+					rptData.setProjDetails(projDetails);
 					rptData.setUomDetails(uomMap.get(projDetails.getUomId()));
-				}
-				//Now  need to run the accumulator specific to the report
-				rptData.setDisplayFields();
-				if(accumlator!=null)
-				{
-					accumlator.addLineItem(rptData);
+					rptData.setDisplayFields();
+					if(accumlator!=null)
+					{
+						accumlator.addLineItem(rptData);
+					}
+					outputList.add(rptData);
 				}
 			}
+			baseList = outputList;
 		}
 		return baseList;
 	}
@@ -107,7 +111,11 @@ public class ReportHelper implements ReportOptions{
 			Map<Long,ProjectDetails> map = new HashMap<Long, ProjectDetails>();
 			for(ProjectDetails projDetails : prjList)
 			{
-				map.put(projDetails.getProjectId(),projDetails);
+				//Execule the deleted prokect 
+				if(projDetails.getDeleteFg().equalsIgnoreCase("N"))
+				{
+					map.put(projDetails.getProjectId(),projDetails);
+				}
 			}
 			return map;
 		}

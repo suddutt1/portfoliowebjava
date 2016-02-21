@@ -38,10 +38,11 @@
 			<th>Account Manager</th>
 			<th>Project Name</th>
 			<th>Project Manager</th>
-			<th>DPE</th>
+			<th>L1 Executive</th>
+			<th>L2 Executive</th>
+			<th>Second Line Manager</th>
+			<th>First Line Manager</th>
 			<th>Blue Community</th>
-			<th>BAM</th>
-			<th>Director</th>
 			<th>ProjType</th>
 			<th>Project Primary Technology</th>
 			<th>Domain</th>
@@ -99,10 +100,11 @@ $(document).ready(function(){
                 }
 			},
 			{ "data" : "displayFileds.projMgr" },
-			{ "data" : "displayFileds.dpe" },
+			{ "data" : "displayFileds.l1ex" },
+			{ "data" : "displayFileds.l2ex" },
+			{ "data" : "displayFileds.slm" },
+			{ "data" : "displayFileds.flm" },
 			{ "data" : "blueCommunity" },
-			{ "data" : "displayFileds.bam" },
-			{ "data" : "displayFileds.director" },
 			{ "data" : "displayFileds.projType" },
 			{ "data" : "displayFileds.projPrimTech" },
 			{ "data" : "displayFileds.domain" },

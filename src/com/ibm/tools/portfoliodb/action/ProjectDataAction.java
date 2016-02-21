@@ -1,6 +1,7 @@
 package com.ibm.tools.portfoliodb.action;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -329,13 +330,14 @@ public class ProjectDataAction implements WebActionHandler {
 		if (projDetails.getUomId() > 0
 				&& getSafeString(projDetails.getProjectName()).length() > 0
 				&& getSafeString(projDetails.getProjMgr()).length() > 0
-				&& getSafeString(projDetails.getDpe()).length() > 0
 				&& getSafeString(projDetails.getBlueCommunity()).length() > 0
-				&& getSafeString(projDetails.getBam()).length() > 0
-				&& getSafeString(projDetails.getDirector()).length() > 0
 				&& getSafeString(projDetails.getProjType()).length() > 0
 				&& getSafeString(projDetails.getProjPrimTech()).length() > 0
-				&& getSafeString(projDetails.getDomain()).length() > 0)
+				&& getSafeString(projDetails.getDomain()).length() > 0
+				&& getSafeString(projDetails.getL1ex()).length()>0 
+				&& getSafeString(projDetails.getL2ex()).length()>0 
+				&& getSafeString(projDetails.getSlm()).length()>0 
+				&& getSafeString(projDetails.getFlm()).length()>0 )
 			return true;
 		return false;
 	}
@@ -344,14 +346,16 @@ public class ProjectDataAction implements WebActionHandler {
 		if (projDetails.getUomId() > 0
 				&& getSafeString(projDetails.getProjectName()).length() > 0
 				&& getSafeString(projDetails.getProjMgr()).length() > 0
-				&& getSafeString(projDetails.getDpe()).length() > 0
 				&& getSafeString(projDetails.getBlueCommunity()).length() > 0
-				&& getSafeString(projDetails.getBam()).length() > 0
-				&& getSafeString(projDetails.getDirector()).length() > 0
 				&& getSafeString(projDetails.getProjType()).length() > 0
 				&& getSafeString(projDetails.getProjPrimTech()).length() > 0
 				&& getSafeString(projDetails.getDomain()).length() > 0
-				&& getSafeString(projDetails.getObjIdHexString()).length() > 0)
+				&& getSafeString(projDetails.getObjIdHexString()).length() > 0
+				&& getSafeString(projDetails.getL1ex()).length()>0 
+				&& getSafeString(projDetails.getL2ex()).length()>0 
+				&& getSafeString(projDetails.getSlm()).length()>0 
+				&& getSafeString(projDetails.getFlm()).length()>0 )
+			
 			return true;
 		return false;
 	}
@@ -363,18 +367,25 @@ public class ProjectDataAction implements WebActionHandler {
 		builtObject.setProjectName(getSafeString(request
 				.getParameter("projectName")));
 		builtObject.setProjMgr(getSafeString(request.getParameter("projMgr")));
-		builtObject.setDpe(getSafeString(request.getParameter("dpe")));
+		//builtObject.setDpe(getSafeString(request.getParameter("dpe")));
 		builtObject.setBlueCommunity(getSafeString(request
 				.getParameter("blueCommunity")));
-		builtObject.setBam(getSafeString(request.getParameter("bam")));
+		/*builtObject.setBam(getSafeString(request.getParameter("bam")));
 		builtObject
-				.setDirector(getSafeString(request.getParameter("director")));
+				.setDirector(getSafeString(request.getParameter("director")));*/
 		builtObject
 				.setProjType(getSafeString(request.getParameter("projType")));
 		builtObject.setProjPrimTech(getSafeString(request
 				.getParameter("projPrimTech")));
 		builtObject.setDomain(getSafeString(request.getParameter("domain")));
 		builtObject.setDeleteFg("N");
+		
+		builtObject.setL1ex(getSafeString(request.getParameter("l1ex")));
+		builtObject.setL2ex(getSafeString(request.getParameter("l2ex")));
+		builtObject.setSlm(getSafeString(request.getParameter("slm")));
+		builtObject.setFlm(getSafeString(request.getParameter("flm")));
+		
+		
 		return builtObject;
 
 	}
@@ -396,7 +407,19 @@ public class ProjectDataAction implements WebActionHandler {
 				.getProjectList(null);
 		if (daoResponse != null
 				&& daoResponse.getStatus() == DAOResponse.STATUS_DAO_SUCCESS) {
-			return (List<ProjectDetails>) daoResponse.getResponse();
+			//Do not display the deleted project here
+			List<ProjectDetails> outputList = new ArrayList<>();
+			List<ProjectDetails> existingList = (List<ProjectDetails>) daoResponse.getResponse();
+			if(existingList!=null && existingList.size()>0)
+			{
+				for(ProjectDetails projDetails : existingList)
+				{
+					if("N".equalsIgnoreCase(projDetails.getDeleteFg())){
+						outputList.add(projDetails);
+					}
+				}
+			}
+			return outputList;
 		} else {
 			return Collections.emptyList();
 		}

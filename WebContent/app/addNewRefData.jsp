@@ -39,7 +39,6 @@
 			<option value="releaseReason">Release Reason</option>
 			<option value="attrReason">Attrition Reason</option>
 			<option value="bc">Blue Community</option>
-			
 		</select>
 		</div>
 		<div>

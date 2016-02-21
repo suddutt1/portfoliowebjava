@@ -23,11 +23,16 @@ public class ProjectDetails implements JSONSerializable {
 	private String projPrimTech;
 	private String domain;
 	private String deleteFg;
+	private String flm;
+	private String slm;
+	private String l1ex;
+	private String l2ex;
+	
 	//Following are internal details of the project
 	private String objIdHexString;
 	private long projectId;//Internal
 	private Map<String,String> displayFileds;
-
+	
 	//Adding reference objects 
 	private UOMDetails uomDetails;
 	
@@ -272,6 +277,11 @@ public class ProjectDetails implements JSONSerializable {
 		dbObject.put("domain",this.domain);
 		dbObject.put("deleteFg",this.deleteFg);
 		dbObject.put("projectId",this.projectId);
+		dbObject.put("flm", this.flm);
+		dbObject.put("slm", this.slm);
+		dbObject.put("l1ex", this.l1ex);
+		dbObject.put("l2ex", this.l2ex);
+		
 		return dbObject;
 	}
 
@@ -281,7 +291,14 @@ public class ProjectDetails implements JSONSerializable {
 		{
 			ProjectDetails parsedObject = new ProjectDetails();
 			parsedObject.setId((ObjectId)dbObject.get("_id"));
-			parsedObject.setUomId((Long)dbObject.get("uomId"));
+			if(dbObject.get("uomId") instanceof Integer)
+			{
+				parsedObject.setUomId(((Integer)dbObject.get("uomId")).longValue());
+			}
+			else
+			{
+				parsedObject.setUomId((Long)dbObject.get("uomId"));
+			}
 			parsedObject.setProjectName((String)dbObject.get("projectName"));
 			parsedObject.setProjMgr((String)dbObject.get("projMgr"));
 			parsedObject.setDpe((String)dbObject.get("dpe"));
@@ -292,7 +309,18 @@ public class ProjectDetails implements JSONSerializable {
 			parsedObject.setProjPrimTech((String)dbObject.get("projPrimTech"));
 			parsedObject.setDomain((String)dbObject.get("domain"));
 			parsedObject.setDeleteFg((String)dbObject.get("deleteFg"));
-			parsedObject.setProjectId((Long)dbObject.get("projectId"));
+			if(dbObject.get("projectId") instanceof Integer)
+			{
+				parsedObject.setProjectId(((Integer)dbObject.get("projectId")).longValue());
+			}
+			else
+			{
+				parsedObject.setProjectId((Long)dbObject.get("projectId"));
+			}
+			parsedObject.setFlm((String)dbObject.get("flm"));
+			parsedObject.setSlm((String)dbObject.get("slm"));
+			parsedObject.setL1ex((String)dbObject.get("l1ex"));
+			parsedObject.setL2ex((String)dbObject.get("l2ex"));
 			parsedObject.setObjIdHexString(parsedObject.getId().toHexString());
 			return parsedObject;
 		}
@@ -309,6 +337,11 @@ public class ProjectDetails implements JSONSerializable {
 		this.displayFileds.put("director", ManagerReferenceDataHelper.getManagerName("dir",this.director));
 		this.displayFileds.put("dpe", ManagerReferenceDataHelper.getManagerName("dpe",this.dpe));
 		this.displayFileds.put("bam", ManagerReferenceDataHelper.getManagerName("bam",this.bam));
+		
+		this.displayFileds.put("flm", ManagerReferenceDataHelper.getManagerName("flm",this.flm));
+		this.displayFileds.put("slm", ManagerReferenceDataHelper.getManagerName("slm",this.slm));
+		this.displayFileds.put("l1ex", ManagerReferenceDataHelper.getManagerName("l1",this.l1ex));
+		this.displayFileds.put("l2ex", ManagerReferenceDataHelper.getManagerName("l2",this.l2ex));
 		
 	}
 
@@ -339,5 +372,68 @@ public class ProjectDetails implements JSONSerializable {
 		this.projPrimTech=(updatedObject.projPrimTech!=null?updatedObject.projPrimTech:this.projPrimTech);
 		this.domain=(updatedObject.domain!=null?updatedObject.domain:this.domain);
 		this.deleteFg=(updatedObject.deleteFg!=null?updatedObject.deleteFg:this.deleteFg);
+		
+		this.flm=(updatedObject.flm!=null?updatedObject.flm:this.flm);
+		this.slm=(updatedObject.slm!=null?updatedObject.slm:this.slm);
+		this.l1ex=(updatedObject.l1ex!=null?updatedObject.l1ex:this.l1ex);
+		this.l2ex=(updatedObject.l2ex!=null?updatedObject.l2ex:this.l2ex);
+		
+		
+	}
+
+	/**
+	 * @return the flm
+	 */
+	public String getFlm() {
+		return flm;
+	}
+
+	/**
+	 * @param flm the flm to set
+	 */
+	public void setFlm(String flm) {
+		this.flm = flm;
+	}
+
+	/**
+	 * @return the slm
+	 */
+	public String getSlm() {
+		return slm;
+	}
+
+	/**
+	 * @param slm the slm to set
+	 */
+	public void setSlm(String slm) {
+		this.slm = slm;
+	}
+
+	/**
+	 * @return the l1ex
+	 */
+	public String getL1ex() {
+		return l1ex;
+	}
+
+	/**
+	 * @param l1ex the l1ex to set
+	 */
+	public void setL1ex(String l1ex) {
+		this.l1ex = l1ex;
+	}
+
+	/**
+	 * @return the l2ex
+	 */
+	public String getL2ex() {
+		return l2ex;
+	}
+
+	/**
+	 * @param l2ex the l2ex to set
+	 */
+	public void setL2ex(String l2ex) {
+		this.l2ex = l2ex;
 	}
 }

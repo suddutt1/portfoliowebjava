@@ -23,7 +23,9 @@ public class ManagerDataLoader {
 	@Test
 	public void testImortFromJSON() throws Exception{
 	
-		importFromFile("C:\\Users\\SUDDUTT1\\SD_DATA\\NONPROJ\\Data\\MGR_DATA_V1.json");
+		//importFromFile("C:\\Users\\SUDDUTT1\\SD_DATA\\NONPROJ\\Data\\MGR_DATA_V1.json");
+		//importFromFile("C:\\Users\\SUDDUTT1\\SD_DATA\\NONPROJ\\Data\\FLMSLM_V1.json");
+		importFromFile("C:\\Users\\SUDDUTT1\\SD_DATA\\NONPROJ\\Data\\FLMSLM_V1_DELTA.json");
 	}
 
 	private void importFromFile(String importPath) throws Exception

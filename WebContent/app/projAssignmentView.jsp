@@ -60,9 +60,10 @@
 			<th>People Manager</th>
 			<th>Program Manager</th>
 			<th>Account Manager</th>
-			<th>Director</th>
-			<th>DPE</th>
-			<th>BAM</th>
+			<th>L1 Executive</th>
+			<th>L2 Executive</th>
+			<th>First Line Manager</th>
+			<th>Second Line Manager</th>
 			<th>PMP ID</th>
 			<th>Employee Notes Id</th>
 			<th>Employee Internet Id</th>
@@ -148,9 +149,10 @@ $(document).ready(function(){
 			{ "data" :  "empDetails.displayFields.pem" },
 			{ "data" :  "uomDetails.displayFields.progMgr" },
 			{ "data" :  "uomDetails.displayFields.accountMgr" },
-			{ "data" :  "projDetails.displayFileds.director" },
-			{ "data" :  "projDetails.displayFileds.dpe" },
-			{ "data" :  "projDetails.displayFileds.bam" },
+			{ "data" :  "projDetails.displayFileds.l1ex" },
+			{ "data" :  "projDetails.displayFileds.l2ex" },
+			{ "data" :  "projDetails.displayFileds.flm" },
+			{ "data" :  "projDetails.displayFileds.slm" },
 			{ "data" :  "pmpId" },
 			{ "data" :  "empDetails.notesId" },
 			{ "data" :  "empDetails.intranetId" },
