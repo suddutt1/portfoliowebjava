@@ -29,56 +29,12 @@ public class MongoDBHelper {
 	private static boolean init() {
 		try {
 			if (mongo == null) {
-				String serviceJSON = System.getenv("VCAP_SERVICES");
-				if (serviceJSON != null) {
-					BasicDBObject obj = (BasicDBObject) JSON.parse(serviceJSON);
-					String thekey = null;
-					Set<String> keys = obj.keySet();
-					LOGGER.log(Level.INFO,
-							"|MONGODB_HELPER|Searching through VCAP keys");
-					// Look for the VCAP key that holds the SQLDB information
-					for (String eachkey : keys) {
-						LOGGER.log(Level.INFO, "|MONGODB_HELPER|Key is: "
-								+ eachkey);
-						if (eachkey.contains("mongolab")) {
-							thekey = eachkey;
-						}
-					}
-					if (thekey == null) {
-						LOGGER.log(Level.INFO,
-								"|MONGODB_HELPER|Cannot find any MONGOLAB service in the VCAP; Falling back to properties file");
-						MongoClientURI uri = new MongoClientURI(
-								LocalVCAPProperties.getLocalProperty("mongodb.url")
-										+ "?connectTimeoutMS=300000");
-						mongo = new MongoClient(uri);
-						db = mongo.getDB(uri.getDatabase());
-						System.out.println("CLOUD  ENVIRONMENT with properties "+ LocalVCAPProperties.getLocalProperty("mongodb.url") );
-
-					} else {
-						BasicDBList list = (BasicDBList) obj.get(thekey);
-						obj = (BasicDBObject) list.get("0");
-						LOGGER.log(
-								Level.INFO,
-								"|MONGODB_HELPER|Service found: "
-										+ obj.get("name"));
-						obj = (BasicDBObject) obj.get("credentials");
-						String dbUri = (String) obj.get("uri");
-						MongoClientURI uri = new MongoClientURI(dbUri
-								+ "?connectTimeoutMS=300000");
-						mongo = new MongoClient(uri);
-						db = mongo.getDB(uri.getDatabase());
-						LOGGER.log(Level.INFO, "|MONGODB_HELPER|DBURL found: "
-								+ dbUri);
-					}
-					System.out.println("COULD ENVIRONMENT ");
-				} else {
 					MongoClientURI uri = new MongoClientURI(
 							LocalVCAPProperties.getLocalProperty("mongodb.url")
 									+ "?connectTimeoutMS=300000");
 					mongo = new MongoClient(uri);
 					db = mongo.getDB(uri.getDatabase());
-					System.out.println("LOCAL ENVIRONMENT . Connecting to "+ LocalVCAPProperties.getLocalProperty("mongodb.url") );
-				}
+					System.out.println("COMMON ENVIRONMENT . Connecting to "+ LocalVCAPProperties.getLocalProperty("mongodb.url") );
 				isInitialized = true;
 			}
 		} catch (Exception ex) {
